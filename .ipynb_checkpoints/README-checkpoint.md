@@ -38,7 +38,7 @@ This will retrieve the data from [Nepal Earthquake Open Data Portal](https://eq2
 │   └── report                       <- final analysis summary notebook
 │
 ├── refrerences         
-│   └── files                        <- reference files
+│   └── data_dictionary              <- reference file
 │
 │
 ├── report        
@@ -69,7 +69,7 @@ coral highlighted regions are the 11 districts from where the data was collected
 
 - Top predictive model was identified to be a Random Forest Classification Model
 - The model was able to predict class 3 (building belonging to damage grade 3 requiring reconstruction) with a recall rate of 67%
-- Our model showed very low variance based on its performance on our train, validation and test data, which gives us confidence in its generalizability.
+- The model showed very low variance based on its performance on train, validation and test data, which gives confidence in its generalizability.
 
 [link for presentation slides](./report/presentation_slides.pdf)
  
@@ -86,9 +86,9 @@ The data was collected through survey by the Central Bureau of Statistics that w
 The dataset mainly consists of information on the buildings' structure and their legal ownership. Each row in the dataset represents a specific building in the region that was hit by the Nepal earthquake of 2015. There were a total of 762106 datapoints.
 
 The target is identified to be an ordinal variable with 3 classes (Damage Grades):
-        - Damage Grade 1: Relates to hairline or thin cracks in plaster on a few walls, damage to non structural parts like chimney, projecting cornices. Only architectural repairs needed. The load carrying capacity of the building is not reduced appreciably.
-        - Damage Grade 2: Refers to large or extensive cracks in most walls, collapse of small portion of non load-bearing walls. Load carrying capacity of structure is partially reduced and significant structural repairs are required.
-        - Damage Grade 3: Relates to total or near collapse of the buildings. Large gaps occur in walls, walls collapse, partial structural failure of floor/roof requiring reconstruction.<sup>2</sup>
+- `Damage Grade 1`: Relates to hairline or thin cracks in plaster on a few walls, damage to non structural parts like chimney, projecting cornices. Only architectural repairs needed. The load carrying capacity of the building is not reduced appreciably.
+- `Damage Grade 2`: Refers to large or extensive cracks in most walls, collapse of small portion of non load-bearing walls. Load carrying capacity of structure is partially reduced and significant structural repairs are required.
+- `Damage Grade 3`: Relates to total or near collapse of the buildings. Large gaps occur in walls, walls collapse, partial structural failure of floor/roof requiring reconstruction.<sup>2</sup>
 
 The feature set mainly comprises of categorical values, most of which describe the parameters of the building with regards to its foundation type, roof type, composition of superstructures, main structure, ownership information and layout of the building. There are three columns that relate to the location of the building - district, municipality and ward ids (from largest to most specific subregion)
 
@@ -101,20 +101,20 @@ The feature set mainly comprises of categorical values, most of which describe t
 ##### Preprocessing Steps were performed as follows:
 
 - Train - Test split the data setting test size to 20%
-    - this gives us a train size of 609674 datapoints and a test size of 152419 datapoints
+    - this gives a train size of 609674 datapoints and a test size of 152419 datapoints
 - Train - Validation split the training data next with validation size set to 25%
-    - this gives us a train size of 457255 datapoints and a validation size of 152419 datapoints
-- Resample the training data using stratified sampling technique from *imblearn.under_sampling* *RandomUnderSampler* which will help in balancing the class imbalance in our training data. (We do this instead of using SMOTE because we have enough datapoints to work with)
-    - this gives us 245571 datapoints in our final training data
+    - this gives a train size of 457255 datapoints and a validation size of 152419 datapoints
+- Resample the training data using stratified sampling technique from *imblearn.under_sampling* *RandomUnderSampler* which will help in balancing the class imbalance in training data. (this is done instead of using SMOTE since there are enough datapoints to work with)
+    - this gives 245571 datapoints in the final training data
 - One Hot Encode all the categorical features in the training data and use the derived encoders of each feature to transform the respective categorical features in the validation and test sets
 - Standardize the numeric features of the datasets using *StandardScaler* object from *sklearn.preprocessing*
 
 #### Modeling
-We first establish our Metric for Model Evaluation
+The Metric for Model Evaluation is established first
 
 #### Metric - Recall Score
 
-##### $\text{Recall Score for Class 3}  = \dfrac{\text{True Positives for Class 3}}{\text{True Positives for Class 3  +  All False Negatives for Class 3}}$
+##### $\text{Recall Score for Class 3} = \dfrac{\text{True Positives for Class 3}}{\text{True Positives for Class 3  +  All False Negatives for Class 3}}$
 
 Modeling iterations were carried out for Logistic Regression, Random Forest Classifier, and Gradient Boosting Classifier Xgboost 
 ### Modeling Steps:
@@ -126,16 +126,16 @@ Modeling iterations were carried out for Logistic Regression, Random Forest Clas
 - Further model iterations were performed to improve the recall score (since the grid search was limited by the choice of grid and downsampled data)
 - Best performers of each classification models were picked and predictions were made using the test data
 
-Based on Recall Score for Class 3, our Metric for evaluating model performance, Random Forest Classifer Model performed better than the other classifiers with a recall score of 67%
+Based on Recall Score for Class 3, the Metric for evaluating model performance, Random Forest Classifer Model performed better than the other classifiers with a recall score of 67%
 
-The hyperparameters for our chosen model were:
+The hyperparameters for the chosen model were:
 - max_depth=12
 - max_features='sqrt'
 - n_estimators=150
 
 #### Conclusion:
 
-This project set out to discover a predictive model that would correctly classify buildings in the region of Nepal based on their potential vulnerability to earthquakes. The model studied the past behaviour of the buildings in the region to be able to predict future failures. Our analysis and model found Random Forest Classifer with 150 estimators and max tree depth of 12 to be our best performer that maximized our recall score for Class 3 at 67%. The overall performance of the model is at an accuracy of 64%. Important building parameters were identified using the best performing model.
+This project set out to discover a predictive model that would correctly classify buildings in the region of Nepal based on their potential vulnerability to earthquakes. The model studied the past behaviour of the buildings in the region to be able to predict future failures. The analysis and model found Random Forest Classifer with 150 estimators and max tree depth of 12 to be the best performer that maximized recall score for Class 3 at 67%. The overall performance of the model is at an accuracy of 64%. Important building parameters were identified using the best performing model.
 - The top features that increase the probability of a building to be classified as class 3 were identified to be:
     - buildings having super structure made of mud, mortar or stone
     - foundation of mud, mortar, stone or brick
@@ -146,9 +146,9 @@ This project set out to discover a predictive model that would correctly classif
 
 ### Future Investigations:
 
-- From the identified important features from our current model further investigation can be conducted to establish relationship between the building features and the varrying damage grades. 
-- Can a black box model such as a Neural Net give us better predictions for our 3 classes?
-- Can we build an app that takes in parameters of buildings in the region of Nepal and give us predictions regarding their potential vulnerability (damage grade)
+- From the identified important features from the current model further investigation can be conducted to establish relationship between the building features and the varrying damage grades. 
+- Can a black box model such as a Neural Net give us better predictions for 3 classes?
+- Can an app be built that takes in parameters of buildings in the region of Nepal and gives predictions regarding their potential vulnerability (damage grade)
 
 
 ### Citations

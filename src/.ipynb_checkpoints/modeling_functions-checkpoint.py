@@ -19,25 +19,23 @@ def scorer_f13():
     scorer = make_scorer(f1_score_class3)
     return scorer
 
-def plot_confusion_matrices(model, X_test, y_test, X_val, y_val, X_train, y_train):
+def plot_confusion_matrices(model, X_val, y_val, X_train, y_train):
     """Plots confusion matrix for test validation and train data
     based on the model
     order of inputs: model, test- X y, Val- X y, and Train- X y
     """
-    fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 6), sharey=True)
+    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 6), sharey=True)
 
-    axes[0].set_title("Test Data",fontsize=14, pad=20)
-    axes[1].set_title("Validation Data", fontsize=14, pad=20)
-    axes[2].set_title("Train Data", fontsize=14, pad=20)
+    axes[0].set_title("Validation Data", fontsize=14, pad=20)
+    axes[1].set_title("Train Data", fontsize=14, pad=20)
 
-    plot_confusion_matrix(model, X_test, y_test, ax=axes[0], cmap='cividis',
+    
+    plot_confusion_matrix(model, X_val, y_val, ax=axes[0], cmap='cividis',
                          normalize='true', display_labels=['Grade 1','Grade 2','Grade 3'])
-    plot_confusion_matrix(model, X_val, y_val, ax=axes[1], cmap='cividis',
-                         normalize='true', display_labels=['Grade 1','Grade 2','Grade 3'])
-    plot_confusion_matrix(model, X_train, y_train, ax=axes[2], cmap='cividis',
+    plot_confusion_matrix(model, X_train, y_train, ax=axes[1], cmap='cividis',
                          normalize='true', display_labels=['Grade 1','Grade 2','Grade 3'])
     
-    for i in range(3):
+    for i in range(2):
         axes[i].tick_params(labelcolor='olive', labelsize=12, pad=5)
         axes[i].set_xlabel('Predicted Damage Grade', fontsize=12, labelpad=14,fontstyle='italic', color='grey')
         axes[i].set_ylabel('True Damage Grade', fontsize=12, labelpad=14, fontstyle='italic', color='grey')
