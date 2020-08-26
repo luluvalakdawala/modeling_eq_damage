@@ -130,3 +130,6 @@ dmypy.json
 
 *.csv
 *.zip
+
+.DS_Store
+.ipynb_checkpoints/
