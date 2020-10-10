@@ -114,7 +114,9 @@ The Metric for Model Evaluation is established first
 
 #### Metric - Recall Score
 
-##### $\text{Recall Score for Class 3} = \dfrac{\text{True Positives for Class 3}}{\text{True Positives for Class 3  +  All False Negatives for Class 3}}$
+\begin{align}
+##### Recall Score for Class 3 = \frac{True Positives for Class 3}{True Positives for Class 3  +  All False Negatives for Class 3}
+\end{align}
 
 Modeling iterations were carried out for Logistic Regression, Random Forest Classifier, and Gradient Boosting Classifier Xgboost 
 ### Modeling Steps:
