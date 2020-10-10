@@ -114,9 +114,9 @@ The Metric for Model Evaluation is established first
 
 #### Metric - Recall Score
 
-\begin{align}
-##### Recall Score for Class 3 = \frac{True Positives for Class 3}{True Positives for Class 3  +  All False Negatives for Class 3}
-\end{align}
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=Recall&space;Score&space;for&space;Class&space;3&space;=&space;\frac{True&space;Positives&space;for&space;Class&space;3}{True&space;Positives&space;for&space;Class&space;3&space;&plus;&space;All&space;False&space;Negatives&space;for&space;Class&space;3}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Recall&space;Score&space;for&space;Class&space;3&space;=&space;\frac{True&space;Positives&space;for&space;Class&space;3}{True&space;Positives&space;for&space;Class&space;3&space;&plus;&space;All&space;False&space;Negatives&space;for&space;Class&space;3}" title="Recall Score for Class 3 = \frac{True Positives for Class 3}{True Positives for Class 3 + All False Negatives for Class 3}" /></a> 
+
 
 Modeling iterations were carried out for Logistic Regression, Random Forest Classifier, and Gradient Boosting Classifier Xgboost 
 ### Modeling Steps:
